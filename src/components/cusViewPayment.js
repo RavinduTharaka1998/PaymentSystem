@@ -5,7 +5,7 @@ import './css/cusProfile.css';
 import PaymentTableRow from './cusPaymentTableRow';
 
 
-export default  class CusAddPayment extends  Component{
+export default  class CusViewPayment extends  Component{
 
 
     constructor(props) {
@@ -72,7 +72,8 @@ export default  class CusAddPayment extends  Component{
 
                         <br/>
                         <h3 align="center">Payment history</h3>
-                        <from style ={{float:'right',display:'flex',gap:5}} onSubmit={this.onSubmit}>
+                        <br/>
+                        <from style ={{marginLeft:1100, display:'flex',gap:5}} onSubmit={this.onSubmit}>
                                 <div className="form-group">
                                     <input type ="text" required value={this.state.search} onChange = {this.onChangeSearch} className="form-control"/>
                                 </div>
@@ -80,7 +81,7 @@ export default  class CusAddPayment extends  Component{
                                     <a href ={"/searchpayment/"+this.state.search+"/"+ this.props.match.params.id} style ={{float:'right',background:'#313332',padding:7,borderRadius:5,color:'white',textDecoration:'none'}}>Search</a>
                                 </div>
                         </from>
-                        <br/><br/>
+                        <br/>
                         <table className="table table-striped" style = {{marginLeft :300,width:"70%"}}>
                             <thead>
                                 <tr>

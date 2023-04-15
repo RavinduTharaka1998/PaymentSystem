@@ -10,6 +10,9 @@ import ProfileEdit from './components/cusEditProfile';
 import AddPayment from './components/cusAddPayment';
 import ViewPayment from './components/cusViewPayment';
 import EditPayment from './components/cusEditPayment';
+import SearchPayment from './components/cusSearchPayment';
+
+import AdminHome from './components/adminHome';
 
 
 
@@ -28,6 +31,10 @@ class App extends Component{
                       <Route path='/addpayment/:id' component={AddPayment}/>
                       <Route path='/viewpayment/:id' component={ViewPayment}/>
                       <Route path='/editpayment/:id' component={EditPayment}/>
+                      <Route path='/searchpayment/:pathParam1?/:pathParam2?' component={SearchPayment}/>
+
+
+                      <Route path='/adminhome' component={AdminHome}/>
                     </Switch>
                 </Router>
 

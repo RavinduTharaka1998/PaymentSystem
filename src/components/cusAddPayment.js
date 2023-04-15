@@ -99,7 +99,8 @@ export default  class CusAddPayment extends  Component{
                                         cvv:''
                                     })
                                     console.log(res.data)});
-                            this.props.history.push('/viewpayment/'+this.props.match.params.id);
+                            //this.props.history.push('/viewpayment/'+this.props.match.params.id);
+                            window.location.replace('/viewpayment/'+this.props.match.params.id);
                
         }else{
             alert('Enter Valide Payment Amount...');
