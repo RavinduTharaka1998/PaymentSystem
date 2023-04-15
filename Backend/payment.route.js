@@ -15,58 +15,59 @@ paymentRoutes.route('/cusadd').post(function (req,res){
         });
 });
 
-// businessRoutes.route('/:id').get(function (req, res){
-//     let email = req.params.id;
-//     console.log(email);
-//     Customers.findOne({$and:[{email : email}]},function (err,cus){
-//         if(err)
-//             console.log(err);
-//         else{
-//             res.json(cus)
-//         }
-//     });
+paymentRoutes.route('/:id').get(function (req, res){
+    let email = req.params.id;
+    console.log(email);
+    Customers.findOne({$and:[{email : email}]},function (err,cus){
+        if(err)
+            console.log(err);
+        else{
+            res.json(cus)
+        }
+    });
 
-// });
+});
 
-// businessRoutes.route('/edit/:id').get(function (req,res){
-//     let id = req.params.id;
-//     Customers.findById(id, function (err,customers){
-//         res.json(customers);
-//     });
-// });
+paymentRoutes.route('/cusedit/:id').get(function (req,res){
+    let id = req.params.id;
+    Customers.findById(id, function (err,customers){
+        res.json(customers);
+    });
+});
 
-// businessRoutes.route('/update/:id').post(function (req,res){
-//     let id = req.params.id;
-//     Customers.findById(id, function (err, customers){
-//         if(!customers)
-//             res.status(404).send("Data is not found??");
-//         else{
-//             customers.name = req.body.name;
-//             customers.address = req.body.address;
-//             customers.nic = req.body.nic;
-//             customers.phone = req.body.phone;
-//             customers.customer_type = req.body.customer_type;
-//             customers.email = req.body.email;
-//             customers.password = req.body.password;
+paymentRoutes.route('/cusupdate/:id').post(function (req,res){
+    let id = req.params.id;
+    console.log("Edit id " +id)
+    Customers.findById(id, function (err, customers){
+        if(!customers)
+            res.status(404).send("Data is not found??");
+        else{
+            customers.name = req.body.name;
+            customers.email = req.body.email;
+            customers.dob = req.body.dob;
+            customers.gender = req.body.gender;
+            customers.city = req.body.city;
+            customers.phone = req.body.phone;
+            customers.password = req.body.password;
 
 
-//             customers.save().then(business => {
-//                 res.json('Update Complete');
-//             })
-//                 .catch(err =>{
-//                     res.status(400).send("Unable to update data");
-//                 });
-//         }
-//     });
-// });
+            customers.save().then(business => {
+                res.json('Update Complete');
+            })
+                .catch(err =>{
+                    res.status(400).send("Unable to update data");
+                });
+        }
+    });
+});
 
-// businessRoutes.route('/delete/:id').get(function(req,res){
-//     Customers.findByIdAndRemove({_id:req.params.id}, function (err, customers){
-//         if(err)res.json(err);
+paymentRoutes.route('/cusdelete/:id').get(function(req,res){
+    Customers.findByIdAndRemove({_id:req.params.id}, function (err, customers){
+        if(err)res.json(err);
 
-//         else res.json('Successfully Removed');
-//     });
-// });
+        else res.json('Successfully Removed');
+    });
+});
 
 
 

@@ -48,7 +48,7 @@ export default  class SignIn extends  Component{
                     if(res.data.message === "Successful Login"){
                         // alert(res.data.message)
                         // alert(Email)
-                        this.props.history.push('/index/'+Email);
+                        this.props.history.push('/profile/'+Email);
                     }
                     else{
                         alert("Invalide Login!!!");

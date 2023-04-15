@@ -5,7 +5,7 @@ import axios from 'axios';
 import './css/cusRegistration.css';
 
 
-export default  class cusRegistration extends  Component{
+export default  class cusEditProfile extends  Component{
 
 
     constructor(props) {
@@ -88,9 +88,9 @@ export default  class cusRegistration extends  Component{
         if(this.state.password ===  this.state.cpassword){
             if(this.state.password.length >= 8){
                 if(this.state.phone.length === 10){
-                            axios.post('http://localhost:4000/payment/cusadd',obj)
+                            axios.post('http://localhost:4000/payment/cusupdate/'+this.props.match.params.id,obj)
                                 .then(res => {
-                                    alert("Registration Successfully");
+                                    alert("Update Successfully");
                                     this.setState({
                                         name: '',
                                         email: '',
@@ -116,6 +116,26 @@ export default  class cusRegistration extends  Component{
             alert('Your password and confirm password are miss match... Pleace enter same passwords');
         }
 
+    }
+
+    componentDidMount() {
+        // alert('edit id ' +this.props.match.params.id);
+        axios.get('http://localhost:4000/payment/cusedit/'+this.props.match.params.id)
+            .then(res => {
+                this.setState({
+                    name: res.data.name,
+                    email: res.data.email,
+                    dob: res.data.dob,
+                    gender: res.data.gender,
+                    city: res.data.city,
+                    phone: res.data.phone,
+                    password: res.data.password,
+                    cpassword: res.data.cpassword
+                });
+            })
+            .catch(function (error){
+                console.log("Can't Get Data");
+            })
     }
 
     render() {
@@ -172,11 +192,9 @@ export default  class cusRegistration extends  Component{
                                     <input type ="password" required className="form-control" placeholder="enter confirm password" value={this.state.cpassword} onChange = {this.onChangeCPassword}/>
                                 </div>
                                 <div className="form-group" >
-                                    <input type = "submit" value = "Register" className="btn btn-primary"/>
+                                    <input type = "submit" value = "Update Profile" className="btn btn-primary"/>
                                 </div>
                             </form>
-
-                            <a href ="/">Already Have an Account</a>
                             
                         </div>
                     </div>
