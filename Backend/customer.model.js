@@ -6,19 +6,19 @@ Customers = new Schema({
     name: {
         type: String
     },
-    address: {
+    email: {
         type: String
     },
-    nic: {
+    dob: {
+        type: String
+    },
+    gender: {
+        type: String
+    },
+    city: {
         type: String
     },
     phone: {
-        type: String
-    },
-    customer_type: {
-        type: String
-    },
-    email: {
         type: String
     },
     password: {

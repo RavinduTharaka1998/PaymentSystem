@@ -37,24 +37,13 @@ export default  class SignIn extends  Component{
             password : this.state.password
         };
 
-        if ((this.state.email === "admin") && (this.state.password === "adminMatara")) {
+        if ((this.state.email === "admin") && (this.state.password === "admin")) {
              const Station = "Matara";
              this.props.history.push('/adminhome/'+Station);
 
-        }
-        else if ((this.state.email === "admin") && (this.state.password === "adminGalle")) {
-
-            const Station = "Galle";
-            this.props.history.push('/adminhome/'+Station);
-
-       }
-       else if ((this.state.email === "admin") && (this.state.password === "adminColombo")) {
-
-        const Station = "Colombo";
-        this.props.history.push('/adminhome/'+Station);
 
        }else {
-            axios.post('http://localhost:4000/trainFood/login',object)
+            axios.post('http://localhost:4000/payment/cuslogin',object)
                 .then(res => {
                     if(res.data.message === "Successful Login"){
                         // alert(res.data.message)
@@ -62,8 +51,8 @@ export default  class SignIn extends  Component{
                         this.props.history.push('/index/'+Email);
                     }
                     else{
-                        // alert(res.data.message)
-                        this.props.history.push('/signIn');
+                        alert("Invalide Login!!!");
+                        this.props.history.push('/');
                     }
 
                 });
@@ -76,15 +65,42 @@ export default  class SignIn extends  Component{
         return(
             <div className='log-container'>
                 <div className='log-top'>
-                    <h2>Login</h2>
+                    {/* <h2>Login</h2> */}
                     <img src = "https://images.pond5.com/artistic-concept-painting-beautiful-train-illustration-209134821_iconl_wide_nowm.jpeg"/>
                 </div>
                 <br/>
                 <div className='log-bottom'>
                     <div className='log-bottom-inner'>
                         <br/>
-                        <h3>User Details</h3>
+                        <h3>User Login Details</h3>
                         <img src = "https://img.freepik.com/premium-vector/people-profile-graphic_24911-21373.jpg"/>
+                        <br/>
+                        <div className="container" style={{marginTop:10}}>
+                            <form onSubmit={this.onSubmit}>
+                                <div className="form-group">
+                                    <label>Username :</label>
+                                    <input type ="text" required className="form-control" placeholder="raone@gmail.com" value={this.state.email} onChange = {this.onChangeEmail}/>
+                                </div>
+                                <div className="form-group">
+                                    <label>Password :</label>
+                                    <input type ="password" required className="form-control" placeholder="********" value={this.state.password} onChange = {this.onChangePassword}/>
+                                </div>
+                                <div className="form-group" >
+                                    <input type = "submit" value = "Sign In" className="btn btn-primary"/>
+                                </div>
+                            </form>
+
+                            <a href ="/registeration">Create New Account</a>
+                            <p style={{textAlign:'center'}}>-------- or use one of these options --------</p>
+
+                            <center>
+                                <div className='social-media'>
+                                    <img src = "https://www.freepnglogos.com/uploads/facebook-logo-icon/facebook-logo-icon-file-facebook-icon-svg-wikimedia-commons-4.png"/>
+                                    <img src = "https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png"/>
+                                    <img src = "https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-twitter-social-media-round-icon-png-image_6315985.png"/>
+                                </div>
+                            </center>
+                        </div>
                     </div>
                 </div>
             </div>

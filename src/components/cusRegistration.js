@@ -2,7 +2,7 @@ import  React, {Component} from 'react';
 import axios from 'axios';
 
 
-// import './css/LandingPage.css';
+import './css/cusRegistration.css';
 
 
 export default  class Create extends  Component{
@@ -11,20 +11,22 @@ export default  class Create extends  Component{
     constructor(props) {
         super(props);
         this.onChangeName = this.onChangeName.bind(this);
-        this.onChangeAddress = this.onChangeAddress.bind(this);
-        this.onChangeNIC = this.onChangeNIC.bind(this);
-        this.onChangePhone = this.onChangePhone.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
+        this.onChangeDoB = this.onChangeDoB.bind(this);
+        this.onChangeGender = this.onChangeGender.bind(this);
+        this.onChangeCity = this.onChangeCity.bind(this);
+        this.onChangePhone = this.onChangePhone.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
-        this.onChangecPassword = this.onChangecPassword.bind(this);
+        this.onChangeCPassword = this.onChangeCPassword.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
             name: '',
-            address: '',
-            nic:'',
+            email: '',
+            dob:'',
+            gender:'',
+            city:'',
             phone:'',
-            email:'',
             password:'',
             cpassword:''
         }
@@ -34,14 +36,24 @@ export default  class Create extends  Component{
            name: e.target.value
         });
     }
-    onChangeAddress(e){
-        this.setState( {
-            address: e.target.value
+    onChangeEmail(e){
+        this.setState({
+            email: e.target.value
         });
     }
-    onChangeNIC(e){
+    onChangeDoB(e){
         this.setState( {
-            nic: e.target.value
+            dob: e.target.value
+        });
+    }
+    onChangeGender(e){
+        this.setState( {
+            gender: e.target.value
+        });
+    }
+    onChangeCity(e){
+        this.setState( {
+            city: e.target.value
         });
     }
     onChangePhone(e){
@@ -49,19 +61,12 @@ export default  class Create extends  Component{
             phone: e.target.value
         });
     }
-
-    onChangeEmail(e){
-
-            this.setState({
-                email: e.target.value
-            });
-    }
     onChangePassword(e){
         this.setState( {
             password: e.target.value
         });
     }
-    onChangecPassword(e){
+    onChangeCPassword(e){
         this.setState( {
             cpassword: e.target.value
         });
@@ -70,45 +75,36 @@ export default  class Create extends  Component{
         e.preventDefault();
         const obj = {
             name : this.state.name,
-            address : this.state.address,
-            nic : this.state.nic,
+            email : this.state.email,
+            dob : this.state.dob,
+            gender : this.state.gender,
+            city : this.state.city,
             phone : this.state.phone,
             email : this.state.email,
             password : this.state.password
         };
        
-        const lastelement = this.state.nic.charAt(this.state.nic.length - 1);
-       
         
         if(this.state.password ===  this.state.cpassword){
             if(this.state.password.length >= 8){
                 if(this.state.phone.length === 10){
-                    if(this.state.nic.length === 10){
-                        if(lastelement === 'V' || lastelement === 'v'){
-                            axios.post('http://localhost:4000/trainFood/add',obj)
+                            axios.post('http://localhost:4000/payment/cusadd',obj)
                                 .then(res => {
                                     alert("Registration Successfully");
                                     this.setState({
-                                        name :'',
-                                        address :'',
-                                        nic :'',
+                                        name: '',
+                                        email: '',
+                                        dob:'',
+                                        gender:'',
+                                        city:'',
                                         phone:'',
-                                        email:'',
                                         password:'',
                                         cpassword:''
                             
                                     })
                                     console.log(res.data)});
-                            this.props.history.push('/signIn');
-                        } 
-                        else {
-                            alert('Invalid NIC Number.. Pleace enter "V" for nic.');
-                        }
-                    } 
-                    else {
-                        alert('Invalid NIC Number.. Pleace enter 10 digits for nic.');
-                    }
-                }
+                            this.props.history.push('/');
+                }        
                 else{
                     alert('Invalid phone number.. Pleace enter 10 numbers for contact number.');
                 }
@@ -124,86 +120,66 @@ export default  class Create extends  Component{
 
     render() {
         return(
-            <div>
-                <div class="sidebar">
-                    <a href="/">Home</a>
-                    <a href="/create">New Customer</a>
-                    <a href="/signin">SignIn</a>
-                    <a href="/about">About Us</a>
-                    <a href="/contact">Contact Us</a>
-
-                    <div className='inner-menu'>
-                        <a href="/signin">Terms & Condition</a>
-                        <a href="/about">Setting</a>
-                        <a href="/contact">More</a>
-                    </div>
+            <div className='reg-container'>
+                <div className='log-top'>
+                    {/* <h2>Login</h2> */}
+                    <img src = "https://images.pond5.com/artistic-concept-painting-beautiful-train-illustration-209134821_iconl_wide_nowm.jpeg"/>
                 </div>
+                <br/>
+                <div className='reg-bottom'>
+                    <div className='reg-bottom-inner'>
+                        <br/>
+                        <h3>User Login Details</h3>
+                        <center>
+                            <img src = "https://img.freepik.com/premium-vector/people-profile-graphic_24911-21373.jpg"/>
+                        </center>
+                        <br/>
+                        <div className="container" style={{marginTop:10}}>
+                            <form onSubmit={this.onSubmit}>
+                                <div className="form-group">
+                                    <label>Name :</label>
+                                    <input type ="text" required className="form-control" placeholder="enter name" value={this.state.name} onChange = {this.onChangeName}/>
+                                </div>
+                                <div className="form-group">
+                                    <label>Email :</label>
+                                    <input type ="email" required className="form-control" placeholder="enter email" value={this.state.email} onChange = {this.onChangeEmail}/>
+                                </div>
+                                <div className="form-group">
+                                    <label>Date of Birth :</label>
+                                    <input type ="date" required className="form-control" value={this.state.dob} onChange = {this.onChangeDoB}/>
+                                </div>
+                                <div className="form-group">
+                                    <label>Gender :</label>
+                                    <select className="form-control" onChange = {this.onChangeGender} value={this.state.gender}>
+                                        <option value="Male">Male</option>
+                                        <option value="FeMale">FeMale</option>
+                                    </select>
+                                </div>
+                                <div className="form-group">
+                                    <label>City :</label>
+                                    <input type ="text" required className="form-control" placeholder="enter city" value={this.state.city} onChange = {this.onChangeCity}/>
+                                </div>
+                                <div className="form-group">
+                                    <label>Contact Number :</label>
+                                    <input type ="number" required className="form-control" placeholder="enter phone number" value={this.state.phone} onChange = {this.onChangePhone}/>
+                                </div>
+                                <div className="form-group">
+                                    <label>Password :</label>
+                                    <input type ="password" required className="form-control" placeholder="enter password" value={this.state.password} onChange = {this.onChangePassword}/>
+                                </div>
+                                <div className="form-group">
+                                    <label>Confirm Password :</label>
+                                    <input type ="password" required className="form-control" placeholder="enter confirm password" value={this.state.cpassword} onChange = {this.onChangeCPassword}/>
+                                </div>
+                                <div className="form-group" >
+                                    <input type = "submit" value = "Register" className="btn btn-primary"/>
+                                </div>
+                            </form>
 
-                <div class="content">
-                    <h2 className= 'tittle'>Fast Food</h2>
-                    <br/>
-                    <div className="container " style={{marginTop:10}}>
-                        <h3 className="text-center" style={{borderBottom:'tomaato solid'}}>Customer Registration Form</h3>
-                        <form onSubmit={this.onSubmit}>
-                            <div className="form-group">
-                                <label>Name :</label>
-                                <input type ="text" required placeholder = "Please enter name" className="form-control" value={this.state.name} onChange = {this.onChangeName}/>
-                            </div>
-                            <div className="form-group">
-                                <label>Address :</label>
-                                <input type ="text" required placeholder = "Please enter address" className="form-control" value={this.state.address} onChange = {this.onChangeAddress}/>
-                            </div>
-                            <div className="form-group">
-                                <label>NIC :</label>
-                                <input type ="text" required placeholder = "Please enter NIC" className="form-control" value={this.state.nic} onChange = {this.onChangeNIC}/>
-                            </div>
-                            <div className="form-group">
-                                <label>Phone Number :</label>
-                                <input type ="number" required placeholder = "Please enter contact number" className="form-control" value={this.state.phone} onChange = {this.onChangePhone}/>
-                            </div>
-                            <div className="form-group">
-                                <label>eMail Address :</label>
-                                <input type ="email" required placeholder = "Please enter email" className="form-control" value={this.state.email} onChange = {this.onChangeEmail}/>
-                            </div>
-                            <div className="form-group">
-                                <label>Password :</label>
-                                <input type ="password" required placeholder = "Please enter Password" className="form-control" value={this.state.password} onChange = {this.onChangePassword}/>
-                            </div>
-                            <div className="form-group">
-                                <label>Confirm Password :</label>
-                                <input type ="password" required placeholder = "Re-Type Password" className="form-control" value={this.state.cpassword} onChange = {this.onChangecPassword}/>
-                                <span>( At least 8 characters )</span>
-                            </div>
-
-                            <div className="form-group">
-                                <input type = "submit" value = "Register Service" className="btn btn-dark"/>
-                            </div>
-                        </form>
-                    </div>
-                    <br/>
-                    <div className='top-footer'>
-                        <div className='col-img'>
-                            <img src = "https://limitlessspice.com/wp-content/uploads/2022/02/kottu-g734b601c4_1920.jpg" width="400"/>
-                            <h4>Koththu</h4>
-                            <h4>Rs 1000/=</h4>
-                        </div>
-                        <div className='col-img'>
-                            <img src = "https://cdn.chinesedragoncafe.com/media/catalog/product/cache/1/image/988x988/9df78eab33525d08d6e5fb8d27136e95/r/i/rice-with-shrimp-_-chicken.jpg" width="475"/>
-                            <h4>Mix Rice</h4>
-                            <h4>Rs 900/=</h4>
-                        </div>
-                        <div className='col-img'>
-                            <img src = "https://static.onecms.io/wp-content/uploads/sites/43/2023/01/12/270770-garlic-noodles-ddmfs-4x3-0189.jpg" width="" height=""/>
-                            <h4>Noodles</h4>
-                            <h4>Rs 1200/=</h4>
+                            <a href ="/">Already Have an Account</a>
+                            
                         </div>
                     </div>
-                     
-                    <br/>
-                    <hr/>
-                  
-                    <hr/>
-                    <br/>
                 </div>
             </div>
         )
