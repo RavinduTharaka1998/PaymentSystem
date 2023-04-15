@@ -44,11 +44,14 @@ export default  class CusProfile extends  Component{
                            <h6>{this.props.match.params.id}</h6>
                         </center>
                         
-                        <a href= {"/index/" +this.props.match.params.id}>Home</a>
-                        <a href={"/myorder/" +this.props.match.params.id}>My Orders</a>
-                        <a href="/about">About Us</a>
-                        <a href="/contact">Contact Us</a>
-                        <a href={"/cusprofile/"+this.props.match.params.id}>Profile</a>
+                        <a href= {"/profile/" +this.props.match.params.id}>Profile</a>
+                        <a href={"/myorder/" +this.props.match.params.id}>Reserved Rooms</a>
+                        <a href="/about">Booked Vehicle</a>
+                        <a href="/contact">Event & Outdor Activity</a>
+                        <a href="/contact">Destination</a>
+                        <a href="/contact">Booked Tour Guides</a>
+                        <a href="/contact">Insurance</a>
+                        <a href={"/addpayment/"+this.props.match.params.id}>Payment</a>
                         <a href="/">SignOut</a>
                     </div>
 
@@ -57,7 +60,6 @@ export default  class CusProfile extends  Component{
 
                         <br/>
                         <h3 align="center">Customer Profile</h3>
-                        <h3  align="center">Your Profile Details</h3>
                         <h5  align="center">You can edit or delete your profile details in here....</h5>
                        
                         <br/> <br/> <br/>

@@ -13,7 +13,7 @@ class TableRow extends Component {
             .then(this.setState({redirect: true}))
             .catch(err => console.log(err))
         alert("Your Accout Successfully Deleted....")
-        window.location.replace('/signIn');
+        window.location.replace('/');
     }
     render() {
         return (

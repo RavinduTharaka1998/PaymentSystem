@@ -7,6 +7,10 @@ import Register from './components/cusRegistration';
 import Profile from './components/cusProfile';
 import ProfileEdit from './components/cusEditProfile';
 
+import AddPayment from './components/cusAddPayment';
+import ViewPayment from './components/cusViewPayment';
+import EditPayment from './components/cusEditPayment';
+
 
 
 class App extends Component{
@@ -20,6 +24,10 @@ class App extends Component{
                       <Route path='/registeration' component={Register}/>
                       <Route path='/profile/:id' component={Profile}/>
                       <Route path='/cusedit/:id' component={ProfileEdit}/>
+                      
+                      <Route path='/addpayment/:id' component={AddPayment}/>
+                      <Route path='/viewpayment/:id' component={ViewPayment}/>
+                      <Route path='/editpayment/:id' component={EditPayment}/>
                     </Switch>
                 </Router>
 
