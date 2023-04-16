@@ -178,6 +178,33 @@ paymentRoutes.route('/cusgetsearchpayment/:pathParam1?/:pathParam2?').get(functi
 });
 
 
+paymentRoutes.route('/').get(function (req,res){
+    console.log("Get All Payments");
+    Payments.find(function (err,payments){
+        res.json(payments);
+    });
+});
+
+
+paymentRoutes.route('/adminapprovepayment/:id').get(function (req,res){
+ 
+    let id = req.params.id;
+    console.log("change payment id : "+id)
+    Payments.findById(id, function (err, payments){
+        if(!payments)
+            res.status(404).send("Data is not found??");
+        else{
+            payments.status = "Done";
+
+            payments.save().then(payments => {
+                res.json('Update Completed');
+            })
+                .catch(err =>{
+                    res.status(400).send("Unable to update data");
+                });
+        }
+    });
+});
 
 
 module.exports = paymentRoutes;

@@ -38,8 +38,8 @@ export default  class SignIn extends  Component{
         };
 
         if ((this.state.email === "admin") && (this.state.password === "admin")) {
-             const Station = "Matara";
-             this.props.history.push('/adminhome/'+Station);
+            
+             this.props.history.push('/adminhome');
 
 
        }else {
